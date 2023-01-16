@@ -1,0 +1,2 @@
+[workspace]
+members = [ "hardware/boolean_gate" ]
