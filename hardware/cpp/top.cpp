@@ -1,4 +1,5 @@
-#include "top.h"
+#include <memory>
+#include "Vtop.h"
 
 std::unique_ptr<Vtop> new_top(int a, int b) {
     std::unique_ptr<Vtop> top(new Vtop);
