@@ -1,3 +1,5 @@
+import "DPI-C" context task println(input num);
+
 module Nand (
     input a,
     input b,
@@ -14,5 +16,6 @@ always @ (a, b)
             begin
                 out = 1;
             end
+       println(out);
     end
 endmodule

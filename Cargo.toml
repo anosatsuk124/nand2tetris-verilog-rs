@@ -1,2 +1,2 @@
 [workspace]
-members = [ "hardware/boolean_gate" ]
+members = [ "hardware/rust" ]

@@ -1,3 +1,4 @@
 .hdl_checker
 *.out
 target
+build
