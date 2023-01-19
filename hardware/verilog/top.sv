@@ -4,9 +4,9 @@ module top (
              output reg out
              );
 
-      Nand n1 (
-               .a(a),
-               .b(b),
-               .out(out)
-               );
+    Nand n1 (
+              .a(a),
+              .b(b),
+              .out(out)
+              );
 endmodule

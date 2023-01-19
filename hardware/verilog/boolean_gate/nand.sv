@@ -8,14 +8,6 @@ module Nand (
 
 always @ (a, b)
     begin
-        if (a == b)
-            begin
-                out = 0;
-            end
-        else
-            begin
-                out = 1;
-            end
-       println(out);
+       out = !(a & b);
     end
 endmodule
