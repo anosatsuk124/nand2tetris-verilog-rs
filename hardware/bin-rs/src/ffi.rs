@@ -1,7 +1,7 @@
 #[cxx::bridge]
 pub mod top {
     unsafe extern "C++" {
-        include!("top.h");
+        include!("top.cpp");
         include!("Vtop.h");
         type Vtop;
         fn new_top(a: i32, b: i32) -> UniquePtr<Vtop>;
