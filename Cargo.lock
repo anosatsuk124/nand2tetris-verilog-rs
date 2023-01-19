@@ -3,7 +3,7 @@
 version = 3
 
 [[package]]
-name = "binary"
+name = "bin-rs"
 version = "0.1.0"
 dependencies = [
  "cmake",
