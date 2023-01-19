@@ -9,7 +9,6 @@ dependencies = [
  "cmake",
  "cxx",
  "cxx-build",
- "lib-rs",
 ]
 
 [[package]]
@@ -80,10 +79,6 @@ dependencies = [
  "quote",
  "syn",
 ]
-
-[[package]]
-name = "lib-rs"
-version = "0.1.0"
 
 [[package]]
 name = "link-cplusplus"

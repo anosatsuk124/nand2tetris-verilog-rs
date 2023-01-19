@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(hardware)
 
-add_subdirectory(lib-rs)
-
 # Define the verilator library to build
 find_package(verilator HINTS $ENV{VERILATOR_ROOT})
 

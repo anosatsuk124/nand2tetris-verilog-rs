@@ -4,11 +4,6 @@ fn main() {
     let dst = cmake::build("../../hardware");
     println!("cargo:rustc-link-search=native={}", dst.display());
     println!("cargo:rustc-link-lib=static=Vtop");
-    println!("cargo:rustc-link-search=native={}", PathBuf::from(env::var("OUT_DIR").unwrap()).display());
-    println!("cargo:rustc-link-lib=static=lib_rs");
-
-    // println!("cargo:rustc-link-lib=dylib=stdc++");
-
     cxx_build::bridge("src/main.rs")
         .flag_if_supported("-std=c++14")
         .include("../cpp")

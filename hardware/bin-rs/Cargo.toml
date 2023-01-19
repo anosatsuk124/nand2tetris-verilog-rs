@@ -7,7 +7,6 @@ edition = "2021"
 
 [dependencies]
 cxx = "1.0"
-lib-rs = { path = "../lib-rs" }
 
 [build-dependencies]
 cmake = "0.1"
