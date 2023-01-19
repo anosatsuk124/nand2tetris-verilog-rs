@@ -8,7 +8,7 @@ module Nand (
 
 always @ (a, b)
     begin
-        if (a == b) 
+        if (a == b)
             begin
                 out = 0;
             end

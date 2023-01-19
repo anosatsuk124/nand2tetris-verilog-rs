@@ -1,33 +1,15 @@
-find_package(verilator HINTS $ENV{VERILATOR_ROOT})
+cmake_minimum_required(VERSION 3.10)
+project(hardware)
 
-# Define the rust library to build
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  set(CARGO_CMD cargo build)
-  set(TARGET_DIR "debug")
-else ()
-  set(CARGO_CMD cargo build --release)
-  set(TARGET_DIR "release")
-endif ()
-
-set(CARGO_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/rust")
-
-set(HARDWARE_A "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_DIR}/libhardware.a")
-
-add_custom_target(hardware ALL
-  COMMENT "Compiling a rust hardware library"
-  COMMAND CARGO_TARGET_DIR=${CMAKE_CURRENT_BINARY_DIR} ${CARGO_CMD}
-  COMMAND cp ${HARDWARE_A} ${CMAKE_CURRENT_BINARY_DIR}
-  WORKING_DIRECTORY ${CARGO_SOURCE_DIR})
-set_target_properties(hardware PROPERTIES LOCATION ${CMAKE_CURRENT_BINARY_DIR})
-
-add_test(NAME hardware_test
-  COMMAND cargo test
-  WORKING_DIRECTORY ${CARGO_SOURCE_DIR})
-
+add_subdirectory(lib-rs)
 
 # Define the verilator library to build
+find_package(verilator HINTS $ENV{VERILATOR_ROOT})
 
+set(TARGET Vtop)
 
-add_executable(Vtop ${CMAKE_CURRENT_SOURCE_DIR}/cpp/top.cpp)
-target_link_libraries(Vtop PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/libhardware.a)
-verilate(Vtop SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/verilog/top.sv ${CMAKE_CURRENT_SOURCE_DIR}/verilog/boolean_gate/nand.sv TOP_MODULE top)
+add_library(${TARGET} ${CMAKE_CURRENT_SOURCE_DIR}/cpp/top.cpp)
+
+verilate(${TARGET} SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/verilog/top.sv ${CMAKE_CURRENT_SOURCE_DIR}/verilog/boolean_gate/nand.sv TOP_MODULE top DIRECTORY "$ENV{OUT_DIR}/verilator")
+
+install (TARGETS ${TARGET} DESTINATION .)

@@ -1,13 +1,12 @@
-#include <verilated.h>
-#include "Vtop.h"
+#include "top.h"
 
-int main() {
-  Vtop* top = new Vtop();
-  top->a = 1;
-  top->b = 0;
-  while (!Verilated::gotFinish()) {
+std::unique_ptr<Vtop> new_top() {
+    std::unique_ptr<Vtop> top(new Vtop);
+    top->a = 0;
+    top->b = 0;
+    return top;
+}
+
+void eval_top(std::unique_ptr<Vtop> top) {
     top->eval();
-  }
-
-  return 0;
 }

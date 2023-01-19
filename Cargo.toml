@@ -1,2 +1,2 @@
 [workspace]
-members = [ "hardware/rust" ]
+members = [ "hardware/bin-rs", "hardware/lib-rs" ]
