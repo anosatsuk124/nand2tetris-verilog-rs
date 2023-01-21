@@ -1,11 +1,8 @@
 module Nand (
-    input a,
-    input b,
-    output reg out
+    input  a,
+    input  b,
+    output out
 );
 
-always @ (a, b)
-    begin
-       out = !(a & b);
-    end
+   assign out = !(a & b);
 endmodule

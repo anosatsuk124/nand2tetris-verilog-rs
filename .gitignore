@@ -2,3 +2,5 @@
 *.out
 target
 build
+nand2tetris/tools
+nand2tetris/projects
