@@ -1,2 +1,2 @@
 [workspace]
-members = [ "hardware/bin-rs" ]
+members = [ "hardware/bin-rs", "hardware/icarus-verilog-testbench" ]
