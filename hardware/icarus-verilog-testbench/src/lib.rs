@@ -6,21 +6,21 @@ pub struct IVerilogTest {
 
 pub struct IVerilogTestBuilder {
     paths: Vec<PathBuf>,
-    args: Vec<String>,
+    top: Option<String>,
 }
 
 impl IVerilogTest {
-    pub fn build() -> IVerilogTestBuilder {
+    pub fn builder() -> IVerilogTestBuilder {
         IVerilogTestBuilder {
             paths: Vec::new(),
-            args: Vec::new(),
+            top: None,
         }
     }
 
     pub fn test(&self, out: &PathBuf) -> Result<String, String> {
         let mut iverilog = std::process::Command::new("iverilog");
-        iverilog.args(&self.args);
         iverilog.args(&["-o", out.to_str().unwrap()]);
+        iverilog.args(&self.args);
         let output = iverilog.output().map_err(|e| e.to_string())?;
         if !output.status.success() {
             return Err(format!(
@@ -50,7 +50,7 @@ impl IVerilogTestBuilder {
     pub fn new() -> Self {
         Self {
             paths: Vec::new(),
-            args: Vec::new(),
+            top: None,
         }
     }
 
@@ -59,12 +59,27 @@ impl IVerilogTestBuilder {
         self
     }
 
-    pub fn arg(mut self, arg: String) -> Self {
-        self.args.push(arg);
+    pub fn paths(mut self, paths: Vec<PathBuf>) -> Self {
+        self.paths.extend(paths);
+        self
+    }
+
+    pub fn top(mut self, top: &str) -> Self {
+        self.top = Some(top.to_string());
         self
     }
 
     pub fn build(self) -> IVerilogTest {
-        IVerilogTest { args: self.args }
+        let mut args = Vec::new();
+        if let Some(top) = self.top {
+            args.push("-s".to_string());
+            args.push(top);
+        }
+        args.extend(
+            self.paths
+                .into_iter()
+                .map(|p| p.to_str().unwrap().to_string()),
+        );
+        IVerilogTest { args }
     }
 }

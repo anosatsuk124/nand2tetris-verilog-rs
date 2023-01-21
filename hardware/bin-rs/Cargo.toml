@@ -8,6 +8,9 @@ edition = "2021"
 [dependencies]
 cxx = "1.0"
 
+[dev-dependencies]
+icarus-verilog-testbench = { path = "../icarus-verilog-testbench" }
+
 [build-dependencies]
 cmake = "0.1"
 cxx-build = "1.0"
