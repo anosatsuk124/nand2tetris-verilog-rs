@@ -1,3 +1,4 @@
+#![cfg(top = "top")]
 use bin_rs::ffi::top;
 
 fn main() {

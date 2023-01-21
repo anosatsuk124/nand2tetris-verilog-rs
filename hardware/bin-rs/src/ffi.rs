@@ -1,10 +1,10 @@
 #[cxx::bridge]
 pub mod top {
     unsafe extern "C++" {
-        include!("top.cpp");
-        type Vtop;
-        fn new_top(a: i32, b: i32) -> UniquePtr<Vtop>;
-        fn eval(top: &UniquePtr<Vtop>);
-        fn get_out(top: &UniquePtr<Vtop>) -> i32;
+        include!("TOP.cpp");
+        type VTOP;
+        fn new_top(a: i32, b: i32) -> UniquePtr<VTOP>;
+        fn eval(top: &UniquePtr<VTOP>);
+        fn get_out(top: &UniquePtr<VTOP>) -> i32;
     }
 }

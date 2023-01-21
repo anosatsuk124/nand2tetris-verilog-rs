@@ -1,10 +1,10 @@
-module top (
+module TOP (
              input a,
              input b,
              output reg out
              );
 
-    Nand n1 (
+    NAND n1 (
               .a(a),
               .b(b),
               .out(out)

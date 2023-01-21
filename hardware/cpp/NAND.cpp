@@ -1,6 +1,6 @@
 #include "VTOP.h"
 
-std::unique_ptr<VTOP> new_top(int a, int b) {
+std::unique_ptr<VTOP> new_nand(int a, int b) {
   std::unique_ptr<VTOP> top(new VTOP);
   top->a = a;
   top->b = b;

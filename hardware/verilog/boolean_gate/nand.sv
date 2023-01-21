@@ -1,6 +1,6 @@
 import "DPI-C" context task println(input num);
 
-module Nand (
+module NAND (
     input a,
     input b,
     output reg out
