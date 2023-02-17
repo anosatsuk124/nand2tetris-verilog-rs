@@ -1,3 +1,5 @@
+`ifndef INCLUDE_NAND
+`define INCLUDE_NAND
 module Nand (
     input  a,
     input  b,
@@ -6,3 +8,5 @@ module Nand (
 
    assign out = !(a & b);
 endmodule
+
+`endif 

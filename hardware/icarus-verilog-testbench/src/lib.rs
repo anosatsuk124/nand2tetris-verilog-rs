@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::{env::args, path::PathBuf};
 
 pub struct IVerilogTest {
     args: Vec<String>,
@@ -7,14 +7,12 @@ pub struct IVerilogTest {
 pub struct IVerilogTestBuilder {
     paths: Vec<PathBuf>,
     top: Option<String>,
+    includes: Vec<String>,
 }
 
 impl IVerilogTest {
     pub fn builder() -> IVerilogTestBuilder {
-        IVerilogTestBuilder {
-            paths: Vec::new(),
-            top: None,
-        }
+        IVerilogTestBuilder::new()
     }
 
     pub fn test(&self, out: &PathBuf) -> Result<String, String> {
@@ -51,6 +49,7 @@ impl IVerilogTestBuilder {
         Self {
             paths: Vec::new(),
             top: None,
+            includes: Vec::new(),
         }
     }
 
@@ -69,12 +68,18 @@ impl IVerilogTestBuilder {
         self
     }
 
+    pub fn include(mut self, include: &str) -> Self {
+        self.includes.push(include.to_string());
+        self
+    }
+
     pub fn build(self) -> IVerilogTest {
         let mut args = Vec::new();
         if let Some(top) = self.top {
             args.push("-s".to_string());
             args.push(top);
         }
+        args.extend(self.includes.into_iter().map(|i| format!("-I{}", i)));
         args.extend(
             self.paths
                 .into_iter()

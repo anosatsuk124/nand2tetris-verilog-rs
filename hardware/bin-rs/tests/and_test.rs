@@ -25,11 +25,8 @@ endmodule
     let boolean_dir = verilog_dir.join("boolean_gate");
     let test = IVerilogTest::builder()
         .top(top_name)
-        .paths(vec![
-            boolean_dir.clone().join("not.sv"),
-            boolean_dir.clone().join("nand.sv"),
-            boolean_dir.clone().join("and.sv"),
-        ])
+        .include(boolean_dir.clone().to_str().unwrap())
+        .paths(vec![boolean_dir.clone().join("and.sv")])
         .path(dst)
         .build();
     let test = test.test(&PathBuf::from(env!("OUT_DIR")).join("nand_test"));

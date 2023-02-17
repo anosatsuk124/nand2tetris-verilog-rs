@@ -1,3 +1,7 @@
+`ifndef INCLUDE_OR
+`define INCLUDE_OR
+`include "not.sv"
+`include "nand.sv"
 module Or(input a, b, output out);
    wire c;
    Not not1(a, c);
@@ -9,3 +13,4 @@ module Or(input a, b, output out);
 
    assign out = e;
 endmodule
+`endif
