@@ -1,4 +1,4 @@
-use std::{env::args, path::PathBuf};
+use std::path::PathBuf;
 
 pub struct IVerilogTest {
     args: Vec<String>,
